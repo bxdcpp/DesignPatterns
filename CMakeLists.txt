@@ -6,6 +6,7 @@ project(DesignPattern)
 set(single_file_examples
 	BridgePattern
 	KMPalgorithm
+	CSingletonPattern
   )
 
 foreach(example ${single_file_examples})
