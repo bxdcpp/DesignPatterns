@@ -39,7 +39,7 @@
        【箭头指向】：带三角箭头的虚线，箭头指向接口
 	    ![Realization UML](https://github.com/bxdcpp/DesignPatterns/blob/master/doc/realization.png  "Realization UML")
 - 关联（Association)
-	* 关联关系】：是一种拥有的关系，它使一个类知道另一个类的属性和方法；如：老师与学生，丈夫与妻子关联可以是双向的，也可以是单向的。双向的关联可以有两个箭头或者没有箭头，单		向的关联有一个箭头。
+	* 关联关系】：是一种拥有的关系，它使一个类知道另一个类的属性和方法；如：老师与学生，丈夫与妻子关联可以是双向的，也可以是单向的。双向的关联可以有两个箭头或者没有箭头，单向的关联有一个箭头。
 		【代码体现】：成员变量
 		【箭头及指向】：带普通箭头的实心线，指向被拥有者
 		![Association UML](https://github.com/bxdcpp/DesignPatterns/blob/master/doc/association.png  "Association UML")
