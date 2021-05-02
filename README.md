@@ -27,7 +27,8 @@
 
 ## URL6大关系
 
-  [这是一个参考博客](https://www.runoob.com)
+  [参考博客一](https://www.runoob.com)
+  [参考博客二](https://blog.csdn.net/mike_caoyong/article/details/42563867)
  
 - 泛化(Generalization)
 	* 【泛化关系】：是一种继承关系，表示一般与特殊的关系，它指定了子类如何特化父类的所有特征和行为。例如：老虎是动物的一种，即有老虎的特性也有动物的共性。
