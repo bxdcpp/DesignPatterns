@@ -6,6 +6,7 @@ project(CreatePattern)
 set(single_file_examples
   AbstractFactory
   CSingletonPattern
+FactoryPattern
   )
 
 foreach(example ${single_file_examples})
