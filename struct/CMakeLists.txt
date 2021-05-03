@@ -6,6 +6,7 @@ set(single_file_examples
 	BridgePattern
 AdapterPattern
 DecoratorPattern
+ProxyPattern
   )
 
 foreach(example ${single_file_examples})
