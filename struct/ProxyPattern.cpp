@@ -72,7 +72,6 @@ private:
 
 int main()
 {
-
 	Image* image = new ProxyImage("test_10mb.jpg");
 
 	// 第一次图像将从磁盘加载
