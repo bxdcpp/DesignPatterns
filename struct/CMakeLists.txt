@@ -7,6 +7,8 @@ set(single_file_examples
 AdapterPattern
 DecoratorPattern
 ProxyPattern
+CompositePattern
+FacadePattern
   )
 
 foreach(example ${single_file_examples})

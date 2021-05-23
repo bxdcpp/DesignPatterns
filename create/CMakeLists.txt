@@ -8,6 +8,7 @@ set(single_file_examples
   CSingletonPattern
 FactoryPattern
 BuilderPattern
+PrototypePattern
   )
 
 foreach(example ${single_file_examples})
