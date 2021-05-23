@@ -1,102 +1,93 @@
 /**************************************************************************
-* 桥接模式
+* 策略模式
 * 
-意图：将抽象部分与实现部分分离，使它们都可以独立的变化。
+意图：定义一系列的算法,把它们一个个封装起来, 并且使它们可相互替换。
 
-主要解决：在有多种可能会变化的情况下，用继承会造成类爆炸问题，扩展起来不灵活。
+主要解决：在有多种算法相似的情况下，使用 if...else 所带来的复杂和难以维护。
 
-何时使用：实现系统可能有多个角度分类，每一种角度都可能变化。
+何时使用：一个系统有许多许多类，而区分它们的只是他们直接的行为。
 
-如何解决：把这种多角度分类分离出来，让它们独立变化，减少它们之间耦合。
+如何解决：将这些算法封装成一个一个的类，任意地替换。
 
-关键代码：抽象类依赖实现类。
+关键代码：实现同一个接口。
 
-应用实例： 1、猪八戒从天蓬元帅转世投胎到猪，转世投胎的机制将尘世划分为两个等级，即：灵魂和肉体，前者相当于抽象化，后者相当于实现化。生灵通过功能的委派，调用肉体对象的功能，使得生灵可以动态地选择。 
-2、墙上的开关，可以看到的开关是抽象的，不用管里面具体怎么实现的。
+应用实例： 1、诸葛亮的锦囊妙计，每一个锦囊就是一个策略。 2、旅行的出游方式，选择骑自行车、坐汽车，每一种旅行方式都是一个策略。 3、JAVA AWT 中的 LayoutManager。
 
-优点： 1、抽象和实现的分离。 2、优秀的扩展能力。 3、实现细节对客户透明。
+优点： 1、算法可以自由切换。 2、避免使用多重条件判断。 3、扩展性良好。
 
-缺点：桥接模式的引入会增加系统的理解与设计难度，由于聚合关联关系建立在抽象层，要求开发者针对抽象进行设计与编程。
+缺点： 1、策略类会增多。 2、所有策略类都需要对外暴露。
 
-使用场景： 1、如果一个系统需要在构件的抽象化角色和具体化角色之间增加更多的灵活性，避免在两个层次之间建立静态的继承联系，通过桥接模式可以使它们在抽象层建立一个关联关系。 
-2、对于那些不希望使用继承或因为多层次继承导致系统类的个数急剧增加的系统，桥接模式尤为适用。 3、一个类存在两个独立变化的维度，且这两个维度都需要进行扩展。
+使用场景： 1、如果在一个系统里面有许多类，它们之间的区别仅在于它们的行为，那么使用策略模式可以动态地让一个对象在许多行为中选择一种行为。 2、一个系统需要动态地在几种算法中选择一种。 3、如果一个对象有很多的行为，如果不用恰当的模式，这些行为就只好使用多重的条件选择语句来实现。
 
-注意事项：对于两个独立变化的维度，使用桥接模式再适合不过了。
+注意事项：如果一个系统的策略多于四个，就需要考虑使用混合模式，解决策略类膨胀的问题。
 **************************************************************************/
 
 #include <iostream>
 
-class DrawAPI
-{
+class Strategy {
 public:
-	virtual void drawCircle(int radius, int x, int y) {};
-private:
-
+	virtual int doOperation(int num1, int num2) = 0;
+	virtual ~Strategy() {};
 };
 
-class RedCircle : public DrawAPI
+class OperationAdd : public  Strategy
 {
 public:
-	void drawCircle(int radius, int x, int y)
-	{
-		std::cout << "Drawing Circle[ color: red, radius: "
-			<< radius << ", x: " << x << ", " << y << "]"<<std::endl;
+
+	int doOperation(int num1, int num2) override {
+		return num1 + num2;
 	}
 };
 
-class GreenCircle : public DrawAPI
+class OperationMultiply : public  Strategy
 {
 public:
-	void drawCircle(int radius, int x, int y)
-	{
-		std::cout << "Drawing Circle[ color: green, radius: "
-			<< radius << ", x: " << x << ", " << y <<"]"<<std::endl;
+
+	int doOperation(int num1, int num2) override {
+		return num1 * num2;
 	}
 };
 
-class Shape
+class OperationSubtract : public  Strategy
 {
 public:
-	virtual void draw() = 0;
 
-protected:
-	DrawAPI* drawAPI;
-	Shape(DrawAPI* drawAPI) {
-		this->drawAPI = drawAPI;
+	int doOperation(int num1, int num2) override {
+		return num1 - num2;
 	}
-
-private:
-
 };
 
-class Circle : public Shape {
-private:
-	int x, y, radius;
-
+class Context {
 public:
-	Circle(int x, int y, int radius, DrawAPI* drawAPI) :
-		x(x), y(y), radius(radius), Shape(drawAPI)
+	Context():m_strategy(nullptr)
 	{
 
 	}
-
-	void draw() {
-		drawAPI->drawCircle(radius, x, y);
+	void setStrategy(Strategy* con)
+	{
+		this->m_strategy = con;
 	}
+	int executeStrategy(int num1, int num2) {
+		return m_strategy->doOperation(num1, num2);
+	}
+private:
+	Strategy* m_strategy;
 };
-
-
 
 
 void main()
 {
-	//抽象和实现分离
-	//shape 不知道DrawAPI的实现和变化，通过抽象来连接具体的实现（多态）
-	DrawAPI* a = new RedCircle();
-	DrawAPI* b = new GreenCircle();
-	Shape* redCircle = new Circle(100, 100, 10, a);
-	Shape* greenCircle = new Circle(100, 100, 10,b);
+	using std::cout;
+	using std::endl;
 
-	redCircle->draw();
-	greenCircle->draw();
+	Context* context = new Context();
+	context->setStrategy(new OperationAdd());
+	cout << "10 + 5 = " << context->executeStrategy(10, 5) << endl;
+
+	context->setStrategy(new OperationSubtract());
+	cout << "10 - 5 = " << context->executeStrategy(10, 5) << endl;
+
+	context->setStrategy(new OperationMultiply());
+	cout << "10 * 5 = " << context->executeStrategy(10, 5) << endl;
+
 }
