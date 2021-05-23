@@ -4,6 +4,7 @@ project(BehaverPattern)
 #aux_source_directory(. single_file_examples)	
 set(single_file_examples
   StrategyPattern
+  MementoPattern
   )
 
 foreach(example ${single_file_examples})
