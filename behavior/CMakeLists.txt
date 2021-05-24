@@ -6,6 +6,7 @@ set(single_file_examples
   StrategyPattern
   MementoPattern
   CommandPattern
+ObersverPattern
   )
 
 foreach(example ${single_file_examples})
