@@ -5,6 +5,7 @@ project(BehaverPattern)
 set(single_file_examples
   StrategyPattern
   MementoPattern
+  CommandPattern
   )
 
 foreach(example ${single_file_examples})
