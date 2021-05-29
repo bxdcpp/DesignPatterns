@@ -7,6 +7,7 @@ set(single_file_examples
   MementoPattern
   CommandPattern
 ObersverPattern
+MediatorPattern
   )
 
 foreach(example ${single_file_examples})
