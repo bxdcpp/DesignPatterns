@@ -25,7 +25,7 @@
 - 系统有更高的灵活性：接口隔离原则
 - 更好地扩展性：迪米特原则
 
-## URL6大关系
+## UML6大关系
 
   [参考博客一](https://www.runoob.com)
   [参考博客二](https://blog.csdn.net/mike_caoyong/article/details/42563867)
